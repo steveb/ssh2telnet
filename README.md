@@ -12,7 +12,6 @@ Telnet related environment variables
 
 SSH related environment variables
 ---------------------------------
-- `USERNAME` name of ssh user to connect to
 - `PASSWORD` password set for user account
 - `KEY` string of public key to connect to ssh
 
@@ -21,7 +20,7 @@ Building
 
 Run the following to build::
 
-    buildah bud -t ssh2telnet:latest .
+    buildah bud -t --build-arg user=switch ssh2telnet:latest .
 
 Running
 -------
@@ -35,11 +34,11 @@ Create an environment file `env.bash`::
 
 Run the container::
 
-    podman run -p 2200:22 --env-file ./env.bash -ti --rm ssh2telnet:latest
+    podman run -p 2222:2222 --env-file ./env.bash --rm ssh2telnet:latest
 
 Connect to the container::
 
-    ssh manager@localhost -p 2200
+    ssh switch@localhost -p 2222
 
 telnet.sh
 ---------
